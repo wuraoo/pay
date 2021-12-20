@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/jquery-3.5.1.js"></script>
+</head>
+<body>
+wait...<br/>
+等待订单：<strong id="order_id" th:text="${out_trade_no}"></strong>
+
+<script>
+    $(document).ready(function(){
+        var order_id = $("#order_id").text();
+        console.log("id",order_id)
+
+        var count = 0;
+        var timer = setTimeout(function () {
+            $.ajax({
+                url: "confirm",
+                type: "GET",
+                data:{"tradeNo": order_id},
+
+                success(data) {
+                    if (data){
+                        alert("支付成功")
+                        clearTimeout(timer);
+                    }else{
+                        count++;
+                        if (count === 12){
+                            alert("支付失败")
+                            clearTimeout(timer);
+                        }
+                    }
+                }
+            })
+        },5000)
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/jquery-3.5.1.js"></script>
+</head>
+<body>
+<h1>支付宝支付测试DEMO</h1><br/>
+<p>网页支付：<button id="dopay">点击支付</button></p>
+<p>手机扫码支付：<img src="/img/wapPay.png" style="height: 100px; width: 100px"></p>
+
+
+<script>
+
+    $(document).ready(function(){
+        $("#dopay").click(function (){
+            $.ajax({
+                url: "pagePay",
+                type: "POST",
+                success: function (data){
+                    document.write(data);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
